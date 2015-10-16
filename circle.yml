@@ -6,4 +6,4 @@ machine:
 ## Customize dependencies
 test:
   override:
-    py.test tests/pystanbol/
+    - py.test tests/pystanbol/
