@@ -29,12 +29,9 @@ class Enhancer():
         self.__rest_client = rest_client
         """:type : RestClient"""
 
-    def enhance(self, content, parameters=None):
+    def enhance(self, content, parameters={}):
         import urllib
         import parser
-
-        if not parameters:
-            parameters = {}
 
         enhancer_endpoint = self.__rest_client.endpoint + self.STANBOL_ENHANCER_PATH
 
