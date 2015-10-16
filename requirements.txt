@@ -3,3 +3,4 @@ socketpool
 rdflib
 pytest
 eventlet
+mock
