@@ -44,9 +44,9 @@ class Enhancer():
                         enhancer_endpoint += "&"
                     enhancer_endpoint += self.__ENHANCER_PARAM_DEREF_FIELDS + "=" + urllib.quote(field)
 
-        if ldpath_fields and len(ldpath_fields) > 0:
-            ldpath_program = self.__build_ldpath(ldpath_fields.get(self.ENHANCER_LDPATH_PREFIXES),
-                                         ldpath_fields[self.ENHANCER_LDPATH_FIELDS])
+        if ldpath and len(ldpath) > 0:
+            ldpath_program = self.__build_ldpath(ldpath.get(self.ENHANCER_LDPATH_PREFIXES),
+                                         ldpath[self.ENHANCER_LDPATH_FIELDS])
             if ldpath_program and len(ldpath_program) > 0:
                 if deref_fields:
                     enhancer_endpoint += "&"
