@@ -2,3 +2,4 @@ restkit
 socketpool
 rdflib
 pytest
+eventlet
