@@ -4,6 +4,10 @@ machine:
     version: 2.7.3
 
 ## Customize dependencies
+dependencies:
+  pre:
+    - pip install setuptools --no-use-wheel --upgrade
+
 test:
   override:
     - py.test tests/pystanbol/
