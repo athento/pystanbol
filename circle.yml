@@ -1,0 +1,9 @@
+## Customize the test machine
+machine:
+  python:
+    version: 2.7.3
+
+## Customize dependencies
+test:
+  override:
+    py.test tests/pystanbol/
