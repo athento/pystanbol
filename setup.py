@@ -22,7 +22,8 @@ setup(
     install_requires=[
         'restkit',
         'socketpool',
-        'rdflib'
+        'rdflib',
+	'eventlet'
     ],
     extras_require={
         'test': [
