@@ -4,6 +4,9 @@ machine:
     version: 2.7.3
 
 ## Customize dependencies
+dependencies:
+  pre:
+    - pip install setuptools --upgrade
 
 test:
   override:
