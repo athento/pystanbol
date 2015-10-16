@@ -1,0 +1,4 @@
+restkit
+socketpool
+rdflib
+pytest
