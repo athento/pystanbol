@@ -3,4 +3,4 @@ socketpool
 rdflib
 pytest
 eventlet
-mock
+mock==1.0.1
