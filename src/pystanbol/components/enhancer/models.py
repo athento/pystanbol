@@ -98,11 +98,11 @@ class TextAnnotation(Annotation):
         return self.__type
 
     @property
-    def selectedText(self):
+    def selected_text(self):
         return self.__selectedText
 
     @property
-    def selectionContext(self):
+    def selection_context(self):
         return self.__selectionContext
 
     @property
@@ -133,11 +133,11 @@ class EntityAnnotation(Annotation):
         self.__entity = entity
 
     @property
-    def entityLabel(self):
+    def entity_label(self):
         return self.__entityLabel
 
     @property
-    def entityReference(self):
+    def entity_reference(self):
         return self.__entityReference
 
     @property
@@ -145,7 +145,7 @@ class EntityAnnotation(Annotation):
         return self.__site
 
     @property
-    def entityTypes(self):
+    def entity_types(self):
         return self.__entityTypes
 
     @property

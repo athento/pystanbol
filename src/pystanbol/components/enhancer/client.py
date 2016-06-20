@@ -95,6 +95,9 @@ class EnhancerResult:
     def get_text_annotations(self, confidence=0.0):
         return [e for e in self.enhancements if isinstance(e, TextAnnotation) and e.confidence > confidence]
 
+    def get_text_annotations_by_type(self, type):
+        return [e for e in self.enhancements if isinstance(e, TextAnnotation) and e.type == type]
+
     def get_entity_annotations(self, textannotation=None, confidence=0.0):
         if not textannotation:
             return [e for e in self.enhancements if isinstance(e, EntityAnnotation) and e.confidence > confidence]
@@ -117,7 +120,7 @@ class EnhancerResult:
         self.enhancements.remove(uri)
 
     def getEntity(self, uri):
-        return next(e.entity for e in self.enhancements if isinstance(e, EntityAnnotation) and e.entityReference == uri)
+        return next(e.entity for e in self.enhancements if isinstance(e, EntityAnnotation) and e.entity_reference == uri)
 
     def filterByConfidence(self, confidenceThreshold):
         toremove = [e.uri for e in self.enhancements if isinstance(e, EntityAnnotation) and e.confidence < confidenceThreshold]
