@@ -1,0 +1,17 @@
+## Customize the test machine
+machine:
+  python:
+    version: 2.7.3
+
+## Customize dependencies
+dependencies:
+  pre:
+    - pip install setuptools --upgrade
+    - pip install coveralls
+    - pip install pytest-cov
+
+test:
+  override:
+    - py.test --cov-report= --cov=pystanbol tests/pystanbol/
+  post:
+    - coveralls

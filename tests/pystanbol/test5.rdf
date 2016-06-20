@@ -1,0 +1,218 @@
+<http://dbpedia.org/resource/France>
+        <http://www.w3.org/2003/01/geo/wgs84_pos#lat>
+                "47.0"^^<http://www.w3.org/2001/XMLSchema#double> , "48.856667"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://www.w3.org/2003/01/geo/wgs84_pos#long>
+                "2.0"^^<http://www.w3.org/2001/XMLSchema#double> , "2.3508334"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://xmlns.com/foaf/0.1/depiction>
+                <http://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg> , <http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/200px-Flag_of_France.svg.png> .
+
+<http://dbpedia.org/resource/New_France>
+        <http://xmlns.com/foaf/0.1/depiction>
+                <http://upload.wikimedia.org/wikipedia/commons/1/17/Union_flag_1606_(Kings_Colors).svg> , <http://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Union_flag_1606_(Kings_Colors).svg/200px-Union_flag_1606_(Kings_Colors).svg.png> .
+
+<http://dbpedia.org/resource/Paris>
+        <http://www.w3.org/2003/01/geo/wgs84_pos#lat>
+                "48.8567"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://www.w3.org/2003/01/geo/wgs84_pos#long>
+                "2.3508"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://xmlns.com/foaf/0.1/depiction>
+                <http://upload.wikimedia.org/wikipedia/commons/6/6e/Paris_-_Eiffelturm_und_Marsfeld2.jpg> , <http://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Paris_-_Eiffelturm_und_Marsfeld2.jpg/200px-Paris_-_Eiffelturm_und_Marsfeld2.jpg> .
+
+<http://dbpedia.org/resource/Paris_Commune>
+        <http://xmlns.com/foaf/0.1/depiction>
+                <http://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg> , <http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/200px-Flag_of_France.svg.png> .
+
+<http://dbpedia.org/resource/Paris_M%C3%A9tro>
+        <http://xmlns.com/foaf/0.1/depiction>
+                <http://upload.wikimedia.org/wikipedia/commons/6/66/Paris_Metro_Sign.jpg> , <http://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Paris_Metro_Sign.jpg/200px-Paris_Metro_Sign.jpg> .
+
+<http://dbpedia.org/resource/Vichy_France>
+        <http://www.w3.org/2003/01/geo/wgs84_pos#lat>
+                "46.166668"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://www.w3.org/2003/01/geo/wgs84_pos#long>
+                "3.4"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://xmlns.com/foaf/0.1/depiction>
+                <http://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg> , <http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/200px-Flag_of_France.svg.png> .
+
+<urn:enhancement-0fad2dd2-dedf-6f8b-c8a3-6c476dc76c12>
+        a       <http://fise.iks-project.eu/ontology/Enhancement> , <http://fise.iks-project.eu/ontology/TextAnnotation> ;
+        <http://fise.iks-project.eu/ontology/confidence>
+                "0.9999980384241645"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://fise.iks-project.eu/ontology/extracted-from>
+                <urn:content-item-sha1-2e431f6d6fb424581608115debe9f3d98e1f7fd9> ;
+        <http://purl.org/dc/terms/created>
+                "2015-10-16T12:20:44.709Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://purl.org/dc/terms/creator>
+                "org.apache.stanbol.enhancer.engines.langdetect.LanguageDetectionEnhancementEngine"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/language>
+                "en" ;
+        <http://purl.org/dc/terms/type>
+                <http://purl.org/dc/terms/LinguisticSystem> .
+
+<urn:enhancement-31139000-95df-fab4-938d-73d5bd410d93>
+        a       <http://fise.iks-project.eu/ontology/Enhancement> , <http://fise.iks-project.eu/ontology/EntityAnnotation> ;
+        <http://fise.iks-project.eu/ontology/confidence>
+                "1.0"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://fise.iks-project.eu/ontology/entity-label>
+                "Paris"@en ;
+        <http://fise.iks-project.eu/ontology/entity-reference>
+                <http://dbpedia.org/resource/Paris> ;
+        <http://fise.iks-project.eu/ontology/entity-type>
+                <http://dbpedia.org/ontology/Place> , <http://dbpedia.org/ontology/PopulatedPlace> , <http://dbpedia.org/ontology/Settlement> , <http://schema.org/Place> , <http://www.opengis.net/gml/_Feature> , <http://www.w3.org/2002/07/owl#Thing> ;
+        <http://fise.iks-project.eu/ontology/extracted-from>
+                <urn:content-item-sha1-2e431f6d6fb424581608115debe9f3d98e1f7fd9> ;
+        <http://purl.org/dc/terms/created>
+                "2015-10-16T12:20:44.725Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://purl.org/dc/terms/creator>
+                "org.apache.stanbol.enhancer.engines.entitytagging.impl.NamedEntityTaggingEngine"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/relation>
+                <urn:enhancement-57a346dd-f8c6-0628-e7f4-ced06ca31329> ;
+        <http://stanbol.apache.org/ontology/entityhub/entityhub#site>
+                "dbpedia" .
+
+<urn:enhancement-57a346dd-f8c6-0628-e7f4-ced06ca31329>
+        a       <http://fise.iks-project.eu/ontology/Enhancement> , <http://fise.iks-project.eu/ontology/TextAnnotation> ;
+        <http://fise.iks-project.eu/ontology/confidence>
+                "0.6398142782321622"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://fise.iks-project.eu/ontology/end>
+                "5"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://fise.iks-project.eu/ontology/extracted-from>
+                <urn:content-item-sha1-2e431f6d6fb424581608115debe9f3d98e1f7fd9> ;
+        <http://fise.iks-project.eu/ontology/selected-text>
+                "Paris"@en ;
+        <http://fise.iks-project.eu/ontology/selection-context>
+                "Paris is the capital of France"@en ;
+        <http://fise.iks-project.eu/ontology/start>
+                "0"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://purl.org/dc/terms/created>
+                "2015-10-16T12:20:44.717Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://purl.org/dc/terms/creator>
+                "org.apache.stanbol.enhancer.engines.opennlp.impl.NamedEntityExtractionEnhancementEngine"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/type>
+                <http://dbpedia.org/ontology/Place> .
+
+<urn:enhancement-747bbbbe-41c2-7755-baad-f4bbc17c17a8>
+        a       <http://fise.iks-project.eu/ontology/Enhancement> , <http://fise.iks-project.eu/ontology/EntityAnnotation> ;
+        <http://fise.iks-project.eu/ontology/confidence>
+                "0.149326402127156"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://fise.iks-project.eu/ontology/entity-label>
+                "Paris Commune"@en ;
+        <http://fise.iks-project.eu/ontology/entity-reference>
+                <http://dbpedia.org/resource/Paris_Commune> ;
+        <http://fise.iks-project.eu/ontology/entity-type>
+                <http://dbpedia.org/ontology/Country> , <http://dbpedia.org/ontology/Place> , <http://dbpedia.org/ontology/PopulatedPlace> , <http://schema.org/Country> , <http://schema.org/Place> , <http://www.w3.org/2002/07/owl#Thing> ;
+        <http://fise.iks-project.eu/ontology/extracted-from>
+                <urn:content-item-sha1-2e431f6d6fb424581608115debe9f3d98e1f7fd9> ;
+        <http://purl.org/dc/terms/created>
+                "2015-10-16T12:20:44.725Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://purl.org/dc/terms/creator>
+                "org.apache.stanbol.enhancer.engines.entitytagging.impl.NamedEntityTaggingEngine"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/relation>
+                <urn:enhancement-57a346dd-f8c6-0628-e7f4-ced06ca31329> ;
+        <http://stanbol.apache.org/ontology/entityhub/entityhub#site>
+                "dbpedia" .
+
+<urn:enhancement-88d70bb2-ed5c-8ab7-c5d3-07cef524db97>
+        a       <http://fise.iks-project.eu/ontology/Enhancement> , <http://fise.iks-project.eu/ontology/TextAnnotation> ;
+        <http://fise.iks-project.eu/ontology/confidence>
+                "0.9851805932226212"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://fise.iks-project.eu/ontology/end>
+                "30"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://fise.iks-project.eu/ontology/extracted-from>
+                <urn:content-item-sha1-2e431f6d6fb424581608115debe9f3d98e1f7fd9> ;
+        <http://fise.iks-project.eu/ontology/selected-text>
+                "France"@en ;
+        <http://fise.iks-project.eu/ontology/selection-context>
+                "Paris is the capital of France"@en ;
+        <http://fise.iks-project.eu/ontology/start>
+                "24"^^<http://www.w3.org/2001/XMLSchema#int> ;
+        <http://purl.org/dc/terms/created>
+                "2015-10-16T12:20:44.717Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://purl.org/dc/terms/creator>
+                "org.apache.stanbol.enhancer.engines.opennlp.impl.NamedEntityExtractionEnhancementEngine"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/type>
+                <http://dbpedia.org/ontology/Place> .
+
+<urn:enhancement-8b6b02e6-279a-b634-8ba8-bae9445292b3>
+        a       <http://fise.iks-project.eu/ontology/Enhancement> , <http://fise.iks-project.eu/ontology/EntityAnnotation> ;
+        <http://fise.iks-project.eu/ontology/confidence>
+                "0.2721585010428829"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://fise.iks-project.eu/ontology/entity-label>
+                "New France"@en ;
+        <http://fise.iks-project.eu/ontology/entity-reference>
+                <http://dbpedia.org/resource/New_France> ;
+        <http://fise.iks-project.eu/ontology/entity-type>
+                <http://dbpedia.org/ontology/Country> , <http://dbpedia.org/ontology/Place> , <http://dbpedia.org/ontology/PopulatedPlace> , <http://schema.org/Country> , <http://schema.org/Place> , <http://www.w3.org/2002/07/owl#Thing> ;
+        <http://fise.iks-project.eu/ontology/extracted-from>
+                <urn:content-item-sha1-2e431f6d6fb424581608115debe9f3d98e1f7fd9> ;
+        <http://purl.org/dc/terms/created>
+                "2015-10-16T12:20:44.726Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://purl.org/dc/terms/creator>
+                "org.apache.stanbol.enhancer.engines.entitytagging.impl.NamedEntityTaggingEngine"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/relation>
+                <urn:enhancement-88d70bb2-ed5c-8ab7-c5d3-07cef524db97> ;
+        <http://stanbol.apache.org/ontology/entityhub/entityhub#site>
+                "dbpedia" .
+
+<urn:enhancement-8f1be7c8-75f2-1ff2-d8e3-6fc9decd9632>
+        a       <http://fise.iks-project.eu/ontology/Enhancement> , <http://fise.iks-project.eu/ontology/EntityAnnotation> ;
+        <http://fise.iks-project.eu/ontology/confidence>
+                "1.0"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://fise.iks-project.eu/ontology/entity-label>
+                "France"@en ;
+        <http://fise.iks-project.eu/ontology/entity-reference>
+                <http://dbpedia.org/resource/France> ;
+        <http://fise.iks-project.eu/ontology/entity-type>
+                <http://dbpedia.org/ontology/Country> , <http://dbpedia.org/ontology/Place> , <http://dbpedia.org/ontology/PopulatedPlace> , <http://schema.org/Country> , <http://schema.org/Place> , <http://www.opengis.net/gml/_Feature> , <http://www.w3.org/2002/07/owl#Thing> ;
+        <http://fise.iks-project.eu/ontology/extracted-from>
+                <urn:content-item-sha1-2e431f6d6fb424581608115debe9f3d98e1f7fd9> ;
+        <http://purl.org/dc/terms/created>
+                "2015-10-16T12:20:44.725Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://purl.org/dc/terms/creator>
+                "org.apache.stanbol.enhancer.engines.entitytagging.impl.NamedEntityTaggingEngine"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/relation>
+                <urn:enhancement-88d70bb2-ed5c-8ab7-c5d3-07cef524db97> ;
+        <http://stanbol.apache.org/ontology/entityhub/entityhub#site>
+                "dbpedia" .
+
+<urn:enhancement-de24d93b-a2b4-ff6f-7595-79adbf4ac9ff>
+        a       <http://fise.iks-project.eu/ontology/Enhancement> , <http://fise.iks-project.eu/ontology/EntityAnnotation> ;
+        <http://fise.iks-project.eu/ontology/confidence>
+                "0.2571544622384965"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://fise.iks-project.eu/ontology/entity-label>
+                "Vichy France"@en ;
+        <http://fise.iks-project.eu/ontology/entity-reference>
+                <http://dbpedia.org/resource/Vichy_France> ;
+        <http://fise.iks-project.eu/ontology/entity-type>
+                <http://dbpedia.org/ontology/Country> , <http://dbpedia.org/ontology/Place> , <http://dbpedia.org/ontology/PopulatedPlace> , <http://schema.org/Country> , <http://schema.org/Place> , <http://www.opengis.net/gml/_Feature> , <http://www.w3.org/2002/07/owl#Thing> ;
+        <http://fise.iks-project.eu/ontology/extracted-from>
+                <urn:content-item-sha1-2e431f6d6fb424581608115debe9f3d98e1f7fd9> ;
+        <http://purl.org/dc/terms/created>
+                "2015-10-16T12:20:44.726Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://purl.org/dc/terms/creator>
+                "org.apache.stanbol.enhancer.engines.entitytagging.impl.NamedEntityTaggingEngine"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/relation>
+                <urn:enhancement-88d70bb2-ed5c-8ab7-c5d3-07cef524db97> ;
+        <http://stanbol.apache.org/ontology/entityhub/entityhub#site>
+                "dbpedia" .
+
+<urn:enhancement-e28f13fe-4b39-9988-b69e-1045ba68035e>
+        a       <http://fise.iks-project.eu/ontology/Enhancement> , <http://fise.iks-project.eu/ontology/EntityAnnotation> ;
+        <http://fise.iks-project.eu/ontology/confidence>
+                "0.2042835216594651"^^<http://www.w3.org/2001/XMLSchema#double> ;
+        <http://fise.iks-project.eu/ontology/entity-label>
+                "Paris Métro"@en ;
+        <http://fise.iks-project.eu/ontology/entity-reference>
+                <http://dbpedia.org/resource/Paris_M%C3%A9tro> ;
+        <http://fise.iks-project.eu/ontology/entity-type>
+                <http://dbpedia.org/ontology/ArchitecturalStructure> , <http://dbpedia.org/ontology/Infrastructure> , <http://dbpedia.org/ontology/Place> , <http://dbpedia.org/ontology/PublicTransitSystem> , <http://dbpedia.org/ontology/RouteOfTransportation> , <http://schema.org/Place> , <http://www.w3.org/2002/07/owl#Thing> ;
+        <http://fise.iks-project.eu/ontology/extracted-from>
+                <urn:content-item-sha1-2e431f6d6fb424581608115debe9f3d98e1f7fd9> ;
+        <http://purl.org/dc/terms/created>
+                "2015-10-16T12:20:44.725Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://purl.org/dc/terms/creator>
+                "org.apache.stanbol.enhancer.engines.entitytagging.impl.NamedEntityTaggingEngine"^^<http://www.w3.org/2001/XMLSchema#string> ;
+        <http://purl.org/dc/terms/relation>
+                <urn:enhancement-57a346dd-f8c6-0628-e7f4-ced06ca31329> ;
+        <http://stanbol.apache.org/ontology/entityhub/entityhub#site>
+                "dbpedia" .

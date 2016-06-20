@@ -1,13 +1,21 @@
 from pystanbol.client import StanbolClient
+from pystanbol.components.enhancer.parser import parseEnhancementStructure
+import mock
+import os
 
 class TestEnhancer():
 
-    __STANBOL_ENDPOINT = "http://textprocessing.athento.com"
+    __STANBOL_ENDPOINT = "http://fake.stanbol.com"
     __TEST_SENTENCE = "Paris is the capital of France"
 
     def test_enhancer_basic(self):
         client = StanbolClient(self.__STANBOL_ENDPOINT)
         enhancer = client.enhancer
+        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test1.rdf")
+        f = open(file_path)
+        txt = f.read()
+        f.close()
+        enhancer.enhance = mock.MagicMock(return_value=parseEnhancementStructure(txt, 'turtle'))
         enhancerResult = enhancer.enhance(self.__TEST_SENTENCE)
         assert len(enhancerResult.enhancements) == 9
         eas = enhancerResult.get_entity_annotations()
@@ -34,6 +42,11 @@ class TestEnhancer():
     def test_enhancer_advanced(self):
         client = StanbolClient(self.__STANBOL_ENDPOINT)
         enhancer = client.enhancer
+        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test2.rdf")
+        f = open(file_path)
+        txt = f.read()
+        f.close()
+        enhancer.enhance = mock.MagicMock(return_value=parseEnhancementStructure(txt, 'turtle'))
         enhancerResult = enhancer.enhance(self.__TEST_SENTENCE, {})
         assert len(enhancerResult.get_text_annotations()) == 3
         bests = enhancerResult.get_best_annotations_map
@@ -92,10 +105,19 @@ class TestEnhancer():
     def test_dereferencing(self):
         client = StanbolClient(self.__STANBOL_ENDPOINT)
         enhancer = client.enhancer
-        params = {enhancer.ENHANCER_DEREFERENCING_FIELDS :
-                      {"long": "geo:long", "lat": "geo:lat", "depic": "foaf:depiction"}}
-        enhancer_result_deref = enhancer.enhance(self.__TEST_SENTENCE, params)
-        enhancer_result = enhancer.enhance(self.__TEST_SENTENCE, {})
+        fields = ["geo:long", "geo:lat", "foaf:depiction"]
+        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test3.rdf")
+        f = open(file_path)
+        txt = f.read()
+        f.close()
+        enhancer.enhance = mock.MagicMock(return_value=parseEnhancementStructure(txt, 'turtle'))
+        enhancer_result_deref = enhancer.enhance(self.__TEST_SENTENCE, dereferencing_fields=fields)
+        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test4.rdf")
+        f = open(file_path)
+        txt = f.read()
+        f.close()
+        enhancer.enhance = mock.MagicMock(return_value=parseEnhancementStructure(txt, 'turtle'))
+        enhancer_result = enhancer.enhance(self.__TEST_SENTENCE)
         bests = enhancer_result_deref.get_best_annotations
         paris_deref = next(ea for ea in bests if ea.entityReference=='http://dbpedia.org/resource/Paris')
         assert paris_deref is not None
@@ -113,18 +135,22 @@ class TestEnhancer():
         assert URIRef("http://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg") in depictions
         lats = france.values("lat", namespace="http://www.w3.org/2003/01/geo/wgs84_pos#", localName=True)
         assert 47.0 in lats
-        params = {enhancer.ENHANCER_DEREFERENCING_FIELDS:{"long": "http://www.w3.org/2003/01/geo/wgs84_pos#long",
-                                                            "lat": "http://www.w3.org/2003/01/geo/wgs84_pos#lat",
-                                                            "foaf": "foaf:depiction"}}
-        enhancer_result_deref = enhancer.enhance(self.__TEST_SENTENCE, params)
+        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test5.rdf")
+        f = open(file_path)
+        txt = f.read()
+        f.close()
+        enhancer.enhance = mock.MagicMock(return_value=parseEnhancementStructure(txt, 'turtle'))
+        fields = ["http://www.w3.org/2003/01/geo/wgs84_pos#long",
+                  "http://www.w3.org/2003/01/geo/wgs84_pos#lat",
+                  "foaf:depiction"]
+        enhancer_result_deref = enhancer.enhance(self.__TEST_SENTENCE, dereferencing_fields=fields)
         france = enhancer_result_deref.getEntity("http://dbpedia.org/resource/France")
         lats = france.values("lat", namespace="http://www.w3.org/2003/01/geo/wgs84_pos#", localName=True)
         assert 47.0 in lats
         # Helpers
         from pystanbol import helpers
-        fields_by_entities = helpers.get_fields_by_entity(bests,params[enhancer.ENHANCER_DEREFERENCING_FIELDS])
+        fields_by_entities = helpers.get_fields_by_entity(bests, fields)
         france_fields = fields_by_entities["http://dbpedia.org/resource/France"]
-        lats = france_fields['lat']
         assert 47.0 in lats
 
 
@@ -135,9 +161,14 @@ class TestEnhancer():
                     'custom':'http://ldpath/custom#'}
         fields = {'foaf:depiction': 'foaf:depiction :: xsd:string',
                   'custom:location':'fn:concat("[",geo:lat,",",geo:long,"]") :: xsd:string'}
-        params = {enhancer.ENHANCER_LDPATH_PREFIXES:prefixes,
+        ldpath = {enhancer.ENHANCER_LDPATH_PREFIXES:prefixes,
                   enhancer.ENHANCER_LDPATH_FIELDS:fields}
-        result = enhancer.enhance(self.__TEST_SENTENCE, params)
+        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test6.rdf")
+        f = open(file_path)
+        txt = f.read()
+        f.close()
+        enhancer.enhance = mock.MagicMock(return_value=parseEnhancementStructure(txt, 'turtle'))
+        result = enhancer.enhance(self.__TEST_SENTENCE, ldpath=ldpath)
         france = result.getEntity("http://dbpedia.org/resource/France")
         location = france.values("location", namespace="http://ldpath/custom#", localName=True)[0]
         assert location == "[48.85666747.0,2.35083342.0]"
@@ -148,5 +179,4 @@ class TestEnhancer():
         from pystanbol import helpers
         ldpath_by_entities = helpers.get_ldpath_fields_by_entity(result.get_best_annotations, prefixes, fields)
         france_fields = ldpath_by_entities["http://dbpedia.org/resource/France"]
-        locations = france_fields['custom:location']
-        assert "[48.85666747.0,2.35083342.0]" in locations
+        assert "[48.85666747.0,2.35083342.0]" in france_fields
