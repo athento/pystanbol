@@ -3,6 +3,7 @@ from pystanbol.components.enhancer.parser import parseEnhancementStructure
 import mock
 import os
 
+
 class TestEnhancer():
 
     __STANBOL_ENDPOINT = "http://fake.stanbol.com"
@@ -24,7 +25,7 @@ class TestEnhancer():
         assert len(enhancerResult.get_entity_annotations()) == 5
         assert eas[0].site == "dbpedia"
 
-        labels = [ea.entityLabel for ea in eas]
+        labels = [ea.entity_label for ea in eas]
         assert "Paris" in labels
         assert "France" in labels
 
@@ -39,6 +40,12 @@ class TestEnhancer():
         assert len(languages) == 1
         assert next(iter(languages)) == 'en'
 
+        places = enhancerResult.get_text_annotations_by_type('http://dbpedia.org/ontology/Place')
+        assert len(places) == 2
+        places_texts = [place.selected_text for place in places]
+        assert 'Paris' in places_texts
+        assert 'France' in places_texts
+
     def test_enhancer_advanced(self):
         client = StanbolClient(self.__STANBOL_ENDPOINT)
         enhancer = client.enhancer
@@ -51,7 +58,7 @@ class TestEnhancer():
         assert len(enhancerResult.get_text_annotations()) == 3
         bests = enhancerResult.get_best_annotations_map
         tas = bests.keys()
-        paris = next(ta for ta in tas if ta.selectedText=='Paris')
+        paris = next(ta for ta in tas if ta.selected_text=='Paris')
         assert paris is not None
         assert paris.start == 0
         assert paris.end == 5
@@ -60,13 +67,13 @@ class TestEnhancer():
         assert ea is not None
         from pystanbol.components.enhancer.models import EntityAnnotation
         assert isinstance(ea, EntityAnnotation)
-        assert ea.entityReference == 'http://dbpedia.org/resource/Paris'
+        assert ea.entity_reference == 'http://dbpedia.org/resource/Paris'
 
         assert enhancerResult.graph is not None
 
         eas = enhancerResult.get_entity_annotations(textannotation=paris)
         assert len(eas) == 3
-        assert all(x in [ea.entityReference for ea in eas]
+        assert all(x in [ea.entity_reference for ea in eas]
                             for x in ['http://dbpedia.org/resource/Paris',
                                       'http://dbpedia.org/resource/Paris_Commune'])
 
@@ -75,7 +82,7 @@ class TestEnhancer():
         assert parisEa.site == 'dbpedia'
         paris = enhancerResult.getEntity('http://dbpedia.org/resource/Paris')
         assert parisEa.site == paris.site
-        assert parisEa.entityReference == paris.uri
+        assert parisEa.entity_reference == paris.uri
         properties = paris.properties
         assert len(properties) != 0
         from rdflib.namespace import RDFS, RDF, FOAF
@@ -119,12 +126,12 @@ class TestEnhancer():
         enhancer.enhance = mock.MagicMock(return_value=parseEnhancementStructure(txt, 'turtle'))
         enhancer_result = enhancer.enhance(self.__TEST_SENTENCE)
         bests = enhancer_result_deref.get_best_annotations
-        paris_deref = next(ea for ea in bests if ea.entityReference=='http://dbpedia.org/resource/Paris')
+        paris_deref = next(ea for ea in bests if ea.entity_reference == 'http://dbpedia.org/resource/Paris')
         assert paris_deref is not None
         paris_deref = paris_deref.entity
         assert len(paris_deref.get_labels()) == 0
         bests2 = enhancer_result.get_best_annotations
-        paris = next(ea for ea in bests2 if ea.entityReference=='http://dbpedia.org/resource/Paris')
+        paris = next(ea for ea in bests2 if ea.entity_reference == 'http://dbpedia.org/resource/Paris')
         paris = paris.entity
         assert len(paris.get_labels()) != 0
         france = enhancer_result_deref.getEntity("http://dbpedia.org/resource/France")
