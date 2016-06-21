@@ -1,7 +1,9 @@
+import os
+
+import mock
+
 from pystanbol.client import StanbolClient
 from pystanbol.components.enhancer.parser import parseEnhancementStructure
-import mock
-import os
 
 
 class TestEnhancer():
