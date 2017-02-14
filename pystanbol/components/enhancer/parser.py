@@ -1,9 +1,11 @@
 from rdflib import Graph
+from rdflib.resource import Resource
 from rdflib.namespace import RDF, DCTERMS
 from pystanbol.FISE import FISE, ENTITY_HUB
 from models import TextAnnotation, EntityAnnotation
 from pystanbol.components.entityhub.models import Entity
 from pystanbol.components.enhancer.client import EnhancerResult
+
 
 def parseEnhancementStructure(strGraph, format):
     graph = Graph()
@@ -11,6 +13,7 @@ def parseEnhancementStructure(strGraph, format):
     enhancements = {subject:parseEnhancement(graph, subject) for subject in graph.subjects(RDF.type, FISE.term('Enhancement'))}
     __processRelations(graph, enhancements)
     return EnhancerResult(graph, enhancements.values())
+
 
 def __processRelations(graph, enhancements):
     for key in enhancements:
@@ -30,6 +33,7 @@ def parseEnhancement(graph, subject):
 
     return None
 
+
 def parseEntity(graph, subject):
     reference = graph.objects(subject, FISE.term('entity-reference')).next()
     if reference:
@@ -39,5 +43,5 @@ def parseEntity(graph, subject):
         except StopIteration: # Some engines are not able to return site
             site = None
 
-        return Entity(reference, site, triples)
+        return Entity(Resource(graph, reference), site, triples)
     return None
