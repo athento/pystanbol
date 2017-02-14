@@ -4,8 +4,8 @@ from rdflib.namespace import split_uri
 
 class Entity:
 
-    def __init__(self, uri, site, triples):
-        self.__uri = uri
+    def __init__(self, reference, site, triples):
+        self.__reference = reference
         self.__site = site
         self.__triples = triples
 
@@ -16,7 +16,7 @@ class Entity:
 
     @property
     def uri(self):
-        return self.__uri.toPython()
+        return self.__reference.identifier.toPython()
 
     def get_labels(self, language=None):
         if not language:
@@ -64,6 +64,30 @@ class Entity:
                 else:
                     aux.append(split_uri(x)[1])
             result = aux
+
+        return result
+
+    def get_properties(self, local_name=True):
+        result = {}
+        from rdflib import Literal
+        for s,p,o in self.__triples:
+            if local_name:
+                key = split_uri(p)[1]
+            else:
+                key = p
+            if not key in result:
+                result[key] = []
+
+            if isinstance(o, Literal):
+                result[key].append(o.value)
+            else:
+                if local_name:
+                    resource = self.__reference.value(p)
+                    qname = resource.qname()
+                    index = qname.index(':')
+                    result[key].append(qname[index+1:])
+                else:
+                    result[key].append(o.toPython())
 
         return result
 

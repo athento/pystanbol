@@ -147,3 +147,25 @@ class EnhancerResult:
     @property
     def get_best_annotations(self):
         return self.get_best_annotations_map.values()
+
+    def to_json(self):
+        annotations = self.get_best_annotations_map
+        result = []
+        for ta, ea in annotations.iteritems():
+            result.append({
+                'start': int(ta.start),
+                'end': int(ta.end),
+                'language': ta.language,
+                'selected_text': ta.selected_text,
+                'label': ea.entity_label,
+                'reference': ea.entity_reference,
+                'site': ea.site,
+                'types': ea.entity.get_types(localName=True),
+                'types_uris': ea.entity.get_types(),
+                'properties': ea.entity.get_properties()
+            })
+
+        return result
+
+
+
