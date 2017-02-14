@@ -82,10 +82,7 @@ class Entity:
                 result[key].append(o.value)
             else:
                 if local_name:
-                    resource = self.__reference.value(p)
-                    qname = resource.qname()
-                    index = qname.index(':')
-                    result[key].append(qname[index+1:])
+                    result[key].append(split_uri(o)[1])
                 else:
                     result[key].append(o.toPython())
 
