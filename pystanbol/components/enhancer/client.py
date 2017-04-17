@@ -1,5 +1,6 @@
 from models import EntityAnnotation, TextAnnotation
 
+
 class Enhancer():
 
     OUTPUTFORMAT = {
@@ -26,7 +27,7 @@ class Enhancer():
 
     def enhance(self, content, format='turtle', chain=None, dereferencing_fields=None, ldpath=None):
         import urllib
-        import parser
+        from pystanbol import parser
 
         enhancer_endpoint = self.__rest_client.endpoint + self.STANBOL_ENHANCER_PATH
 
@@ -60,7 +61,7 @@ class Enhancer():
         }
 
         response = self.__rest_client.rest_post(enhancer_endpoint, content, headers)
-        return parser.parseEnhancementStructure(response.body_string("UTF-8"), format)
+        return parser.parse_enhancement_structure(response.body_string("UTF-8"), format)
 
     @staticmethod
     def __build_ldpath(prefixes, fields):

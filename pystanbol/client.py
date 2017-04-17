@@ -14,13 +14,13 @@ class _RestClient(object):
         self.__options = kwargs
         self.__options['pool'] = __pool
 
-    def rest_get(self, url, headers):
+    def rest_get(self, url, headers={}):
         return request(url, 'GET', None, headers, **self.__options)
 
-    def rest_post(self, url, body, headers):
+    def rest_post(self, url, body, headers={}):
         return request(url, 'POST', body, headers, **self.__options)
 
-    def rest_delete(self, url, headers):
+    def rest_delete(self, url, headers={}):
         return request(url, 'DELETE', None, headers, **self.__options)
 
 
@@ -37,3 +37,9 @@ class StanbolClient(object):
     def enhancer(self):
         from components.enhancer.client import Enhancer
         return Enhancer(self.rest_client)
+
+    @property
+    def entityhub(self):
+        from components.entityhub.client import EntityHub
+        return EntityHub(self.rest_client)
+

@@ -2,13 +2,13 @@ from rdflib.namespace import RDF, RDFS, DCTERMS
 from rdflib.namespace import Namespace
 from rdflib.namespace import split_uri
 
+
 class Entity:
 
     def __init__(self, reference, site, triples):
         self.__reference = reference
         self.__site = site
         self.__triples = triples
-
 
     @property
     def site(self):
@@ -17,6 +17,10 @@ class Entity:
     @property
     def uri(self):
         return self.__reference.identifier.toPython()
+
+    @property
+    def graph(self):
+        return self.__reference.graph
 
     def get_labels(self, language=None):
         if not language:
