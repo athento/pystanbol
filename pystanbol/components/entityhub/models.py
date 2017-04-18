@@ -5,10 +5,19 @@ from rdflib.namespace import split_uri
 
 class Entity:
 
-    def __init__(self, reference, site, triples):
+    def __init__(self, reference, site, graph):
         self.__reference = reference
         self.__site = site
-        self.__triples = triples
+        self.__graph = graph
+
+    @classmethod
+    def empty_entity(cls, uri):
+        from rdflib import Graph, URIRef
+        from rdflib.resource import Resource
+        ref = URIRef(uri)
+        g = Graph()
+        reference = Resource(g, ref)
+        return cls(reference, None, g)
 
     @property
     def site(self):
@@ -20,28 +29,28 @@ class Entity:
 
     @property
     def graph(self):
-        return self.__reference.graph
+        return self.__graph
 
     def get_labels(self, language=None):
         if not language:
-            return [o for s,p,o in self.__triples if p == RDFS.label]
+            return [o for s,p,o in self.__graph if p == RDFS.label]
         else:
-            return [o.value for s,p,o in self.__triples if p == RDFS.label and o.language == language]
+            return [o.value for s,p,o in self.__graph if p == RDFS.label and o.language == language]
 
     def get_categories(self):
-        return [o for s,p,o in self.__triples if p == DCTERMS.subject]
+        return [o for s,p,o in self.__graph if p == DCTERMS.subject]
 
     def get_types(self, localName=False):
         if not localName:
-            return [o for s,p,o in self.__triples if p == RDF.type]
+            return [o for s,p,o in self.__graph if p == RDF.type]
         else:
-            return [split_uri(o)[1] for s,p,o in self.__triples if p == RDF.type]
+            return [split_uri(o)[1] for s,p,o in self.__graph if p == RDF.type]
 
     def get_descriptions(self, language=None):
         if not language:
-            return [o for s,p,o in self.__triples if p == RDFS.comment]
+            return [o for s,p,o in self.__graph if p == RDFS.comment]
         else:
-            return [o.value for s,p,o in self.__triples if p == RDFS.comment and o.language == language]
+            return [o.value for s,p,o in self.__graph if p == RDFS.comment and o.language == language]
 
     def values(self, property, namespace=None, language=None, localName=False):
         from rdflib import URIRef
@@ -55,9 +64,9 @@ class Entity:
             predicate = property
 
         if language:
-            result = [o for s,p,o in self.__triples if p == predicate and o.language == language]
+            result = [o for s,p,o in self.__graph if p == predicate and o.language == language]
         else:
-            result = [o for s,p,o in self.__triples if p == predicate]
+            result = [o for s,p,o in self.__graph if p == predicate]
 
         if localName:
             from rdflib import Literal
@@ -74,7 +83,7 @@ class Entity:
     def get_properties(self, local_name=True):
         result = {}
         from rdflib import Literal
-        for s,p,o in self.__triples:
+        for s,p,o in self.__graph:
             if local_name:
                 key = split_uri(p)[1]
             else:
@@ -92,17 +101,19 @@ class Entity:
 
         return result
 
-    def setProperty(self, namespace, property, value):
-        if isinstance(namespace, Namespace):
-            predicate = namespace.term(property)
-        else:
-            n = Namespace(namespace)
-            predicate = n.term(property)
+    def add_property(self, property, value, namespace=None):
+        from rdflib.term import URIRef
+        if isinstance(property, URIRef):
+            self.__graph.add((self.__reference.identifier, property, value))
+        elif isinstance(property, str):
+            if isinstance(namespace, Namespace):
+                predicate = namespace.term(property)
+            else:
+                n = Namespace(namespace)
+                predicate = n.term(property)
 
-        from itertools import chain
-        chain(self.__triples, [(self.uri, predicate, value)])
-
+            self.__graph.add((self.__reference.identifier, predicate, value))
 
     @property
     def properties(self):
-        return set([p for s,p,o in self.__triples])
+        return set([p for s,p,o in self.__graph])

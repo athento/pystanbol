@@ -30,7 +30,7 @@ def parse_enhancement(graph, subject):
             return TextAnnotation(graph, subject)
         elif type == FISE.term("EntityAnnotation"):
             reference = graph.objects(subject, FISE.term('entity-reference')).next()
-            return EntityAnnotation(graph, subject, parse_entity(graph, reference))
+            return EntityAnnotation(graph, subject, parse_entity(graph, reference, subject))
 
     return None
 
@@ -48,11 +48,14 @@ def parse_entity_from_str(str_rdf_entity, format, entity_uri=None):
     return parse_entity(graph, subject)
 
 
-def parse_entity(graph, entity_reference):
+def parse_entity(graph, entity_reference, subject=None):
     if entity_reference:
         triples = list(graph.triples((entity_reference, None, None)))
         try:
-            site = graph.objects(entity_reference, ENTITY_HUB.site).next().value
+            if subject:
+                site = graph.objects(subject, ENTITY_HUB.site).next().value
+            else:
+                site = graph.objects(entity_reference, ENTITY_HUB.site).next().value
         except StopIteration: # Some engines are not able to return site
             from rdflib import URIRef
             entity_uri = entity_reference.toPython()
@@ -63,5 +66,8 @@ def parse_entity(graph, entity_reference):
             except:
                 site = None
 
-        return Entity(Resource(graph, entity_reference), site, triples)
+        g = Graph()
+        for s, p, o in triples:
+            g.add((s, p, o))
+        return Entity(Resource(graph, entity_reference), site, g)
     return None
