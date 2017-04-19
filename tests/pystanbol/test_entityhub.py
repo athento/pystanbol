@@ -40,14 +40,16 @@ class TestEntityHub():
         entity.add_property(RDF.type, FOAF.Person)
         entity.add_property(RDFS.label, Literal("Mary", lang="en"))
         entity.add_property('nick', Literal("donna", lang="en"), namespace=FOAF)
+        entity.add_property(FOAF.name, 'Maria')
         entityhub.create_or_update_entity(entity)
         entity = entityhub.get_entity('http://apache.stanbol.org/resource/1')
         properties = entity.get_properties()
-        assert len(properties) == 4
+        assert len(properties) == 5
         assert properties['label'][0] == 'Mary'
         assert entity.get_types()[0].toPython().lower() == FOAF.person.toPython().lower()
         assert entity.values(FOAF.nick)[0].value == 'donna'
         assert entity.values(FOAF.nick)[0].language == 'en'
+        assert entity.values(FOAF.name)[0].value == 'Maria'
         entityhub.delete_entity('http://apache.stanbol.org/resource/1')
 
 
