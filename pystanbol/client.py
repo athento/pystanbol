@@ -1,9 +1,14 @@
 __author__ = 'Rafa Haro <rh@athento.com>'
 
-from restkit import Connection, request
+from restkit import Connection, request, RequestError
 
 from socketpool import ConnectionPool
 import eventlet
+
+
+class StanbolConnectionError(Exception):
+    pass
+
 
 class _RestClient(object):
 
@@ -14,14 +19,32 @@ class _RestClient(object):
         self.__options = kwargs
         self.__options['pool'] = __pool
 
-    def rest_get(self, url, headers):
-        return request(url, 'GET', None, headers, **self.__options)
+    def rest_get(self, url, headers={}):
+        try:
+            return request(url, 'GET', None, headers, **self.__options)
+        except RequestError, e:
+            if 'ECONNREFUSED' in e.message:
+                raise StanbolConnectionError("Connection refused to %s" % self.endpoint)
+            else:
+                raise e
 
-    def rest_post(self, url, body, headers):
-        return request(url, 'POST', body, headers, **self.__options)
+    def rest_post(self, url, body, headers={}):
+        try:
+            return request(url, 'POST', body, headers, **self.__options)
+        except RequestError, e:
+            if 'ECONNREFUSED' in e.message:
+                raise StanbolConnectionError("Connection refused to %s" % self.endpoint)
+            else:
+                raise e
 
-    def rest_delete(self, url, headers):
-        return request(url, 'DELETE', None, headers, **self.__options)
+    def rest_delete(self, url, headers={}):
+        try:
+            return request(url, 'DELETE', None, headers, **self.__options)
+        except RequestError, e:
+            if 'ECONNREFUSED' in e.message:
+                raise StanbolConnectionError("Connection refused to %s" % self.endpoint)
+            else:
+                raise e
 
 
 class StanbolClient(object):
@@ -37,3 +60,9 @@ class StanbolClient(object):
     def enhancer(self):
         from components.enhancer.client import Enhancer
         return Enhancer(self.rest_client)
+
+    @property
+    def entityhub(self):
+        from components.entityhub.client import EntityHub
+        return EntityHub(self.rest_client)
+

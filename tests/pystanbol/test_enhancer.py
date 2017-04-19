@@ -3,7 +3,7 @@ import os
 import mock
 
 from pystanbol.client import StanbolClient
-from pystanbol.components.enhancer.parser import parseEnhancementStructure
+from pystanbol.parser import parse_enhancement_structure
 
 
 class TestEnhancer():
@@ -18,7 +18,7 @@ class TestEnhancer():
         f = open(file_path)
         txt = f.read()
         f.close()
-        enhancer.enhance = mock.MagicMock(return_value=parseEnhancementStructure(txt, 'turtle'))
+        enhancer.enhance = mock.MagicMock(return_value=parse_enhancement_structure(txt, 'turtle'))
         enhancerResult = enhancer.enhance(self.__TEST_SENTENCE)
         assert len(enhancerResult.enhancements) == 9
         eas = enhancerResult.get_entity_annotations()
@@ -55,7 +55,7 @@ class TestEnhancer():
         f = open(file_path)
         txt = f.read()
         f.close()
-        enhancer.enhance = mock.MagicMock(return_value=parseEnhancementStructure(txt, 'turtle'))
+        enhancer.enhance = mock.MagicMock(return_value=parse_enhancement_structure(txt, 'turtle'))
         enhancerResult = enhancer.enhance(self.__TEST_SENTENCE, {})
         assert len(enhancerResult.get_text_annotations()) == 3
         bests = enhancerResult.get_best_annotations_map
@@ -119,13 +119,13 @@ class TestEnhancer():
         f = open(file_path)
         txt = f.read()
         f.close()
-        enhancer.enhance = mock.MagicMock(return_value=parseEnhancementStructure(txt, 'turtle'))
+        enhancer.enhance = mock.MagicMock(return_value=parse_enhancement_structure(txt, 'turtle'))
         enhancer_result_deref = enhancer.enhance(self.__TEST_SENTENCE, dereferencing_fields=fields)
         file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test4.rdf")
         f = open(file_path)
         txt = f.read()
         f.close()
-        enhancer.enhance = mock.MagicMock(return_value=parseEnhancementStructure(txt, 'turtle'))
+        enhancer.enhance = mock.MagicMock(return_value=parse_enhancement_structure(txt, 'turtle'))
         enhancer_result = enhancer.enhance(self.__TEST_SENTENCE)
         bests = enhancer_result_deref.get_best_annotations
         paris_deref = next(ea for ea in bests if ea.entity_reference == 'http://dbpedia.org/resource/Paris')
@@ -148,7 +148,7 @@ class TestEnhancer():
         f = open(file_path)
         txt = f.read()
         f.close()
-        enhancer.enhance = mock.MagicMock(return_value=parseEnhancementStructure(txt, 'turtle'))
+        enhancer.enhance = mock.MagicMock(return_value=parse_enhancement_structure(txt, 'turtle'))
         fields = ["http://www.w3.org/2003/01/geo/wgs84_pos#long",
                   "http://www.w3.org/2003/01/geo/wgs84_pos#lat",
                   "foaf:depiction"]
@@ -176,7 +176,7 @@ class TestEnhancer():
         f = open(file_path)
         txt = f.read()
         f.close()
-        enhancer.enhance = mock.MagicMock(return_value=parseEnhancementStructure(txt, 'turtle'))
+        enhancer.enhance = mock.MagicMock(return_value=parse_enhancement_structure(txt, 'turtle'))
         result = enhancer.enhance(self.__TEST_SENTENCE, ldpath=ldpath)
         france = result.getEntity("http://dbpedia.org/resource/France")
         location = france.values("location", namespace="http://ldpath/custom#", localName=True)[0]
