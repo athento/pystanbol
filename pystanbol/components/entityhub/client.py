@@ -20,6 +20,7 @@ class EntityHub():
         endpoint = self.__rest_client.endpoint + \
                    self.STANBOL_ENTITYHUB_PATH + "/" + \
                    self.STANBOL_ENTITYHUB_SITEMANAGER_PATH + "/referenced"
+
         response = self.__rest_client.rest_get(endpoint)
         if response.status_int == 200:
             return json.loads((response.body_string("UTF-8")))
