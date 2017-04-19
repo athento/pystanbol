@@ -102,7 +102,9 @@ class Entity:
         return result
 
     def add_property(self, property, value, namespace=None):
-        from rdflib.term import URIRef
+        from rdflib import URIRef, Literal
+        if isinstance(value, str) or isinstance(value, unicode):
+            value = Literal(value)
         if isinstance(property, URIRef):
             self.__graph.add((self.__reference.identifier, property, value))
         elif isinstance(property, str):
