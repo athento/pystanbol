@@ -95,7 +95,10 @@ class Entity:
                 result[key].append(o.value)
             else:
                 if local_name:
-                    result[key].append(split_uri(o)[1])
+                    try:
+                        result[key].append(split_uri(o)[1])
+                    except:
+                        result[key].append(o.toPython())
                 else:
                     result[key].append(o.toPython())
 
