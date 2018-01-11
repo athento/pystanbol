@@ -52,16 +52,16 @@ class Entity:
         else:
             return [o.value for s,p,o in self.__graph if p == RDFS.comment and o.language == language]
 
-    def values(self, property, namespace=None, language=None, localName=False):
+    def values(self, eproperty, namespace=None, language=None, localName=False):
         from rdflib import URIRef
-        if not isinstance(property, URIRef):
+        if not isinstance(eproperty, URIRef):
             if namespace:
                 n = Namespace(namespace)
-                predicate = n.term(property)
+                predicate = n.term(eproperty)
             else:
-                predicate = URIRef(property)
+                predicate = URIRef(eproperty)
         else:
-            predicate = property
+            predicate = eproperty
 
         if language:
             result = [o for s,p,o in self.__graph if p == predicate and o.language == language]
@@ -83,7 +83,7 @@ class Entity:
     def get_properties(self, local_name=True):
         result = {}
         from rdflib import Literal
-        for s,p,o in self.__graph:
+        for s, p, o in self.__graph:
             if local_name:
                 key = split_uri(p)[1]
             else:
