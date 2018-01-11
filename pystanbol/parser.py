@@ -7,9 +7,9 @@ from pystanbol.components.entityhub.models import Entity
 from pystanbol.components.enhancer.client import EnhancerResult
 
 
-def parse_enhancement_structure(strGraph, format):
+def parse_enhancement_structure(strGraph, gformat):
     graph = Graph()
-    graph.parse(data=strGraph, format=format)
+    graph.parse(data=strGraph, format=gformat)
     enhancements = {subject:parse_enhancement(graph, subject) for subject in graph.subjects(RDF.type, FISE.term('Enhancement'))}
     __process_relations(graph, enhancements)
     return EnhancerResult(graph, enhancements.values())
@@ -25,19 +25,19 @@ def __process_relations(graph, enhancements):
 
 def parse_enhancement(graph, subject):
     types = graph.objects(subject, RDF.type)
-    for type in types:
-        if type == FISE.term("TextAnnotation"):
+    for etype in types:
+        if etype == FISE.term("TextAnnotation"):
             return TextAnnotation(graph, subject)
-        elif type == FISE.term("EntityAnnotation"):
+        elif etype == FISE.term("EntityAnnotation"):
             reference = graph.objects(subject, FISE.term('entity-reference')).next()
             return EntityAnnotation(graph, subject, parse_entity(graph, reference, subject))
 
     return None
 
 
-def parse_entity_from_str(str_rdf_entity, format, entity_uri=None):
+def parse_entity_from_str(str_rdf_entity, gformat, entity_uri=None):
     graph = Graph()
-    graph.parse(data=str_rdf_entity, format=format)
+    graph.parse(data=str_rdf_entity, format=gformat)
     if not entity_uri:
         subjects = graph.subjects(None, None)
         subject = subjects[0]

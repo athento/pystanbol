@@ -1,5 +1,5 @@
 from pystanbol.client import StanbolClient
-from rdflib import Graph, Literal, Namespace, RDF, URIRef, RDFS
+from rdflib import Graph, Literal, RDF, URIRef, RDFS
 from rdflib.namespace import FOAF
 from pystanbol.components.entityhub.models import Entity
 import pytest

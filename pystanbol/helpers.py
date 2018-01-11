@@ -26,6 +26,6 @@ def get_ldpath_fields_by_entity(entities, prefixes, fields):
             namespace = prefixes[prefix]
         except KeyError:
             continue
-        property = namespace+field
-        built_fields.append(property)
+        eproperty = namespace+field
+        built_fields.append(eproperty)
     return get_fields_by_entity(entities, built_fields)

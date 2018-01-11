@@ -1,7 +1,5 @@
 class EntityHub():
-    """
-    EntityHub REST API consumer 
-    """
+    """EntityHub REST API consumer"""
 
     STANBOL_ENTITYHUB_PATH = "entityhub"
     STANBOL_ENTITYHUB_SITE_PATH = "site"
@@ -12,10 +10,7 @@ class EntityHub():
         """:type : RestClient"""
 
     def get_sites(self):
-        """
-        Returns a list containing the IDs of all sites configured in Stanbol
-        :return: 
-        """
+        """Returns a list containing the IDs of all sites configured in Stanbol """
         import json
         endpoint = self.__rest_client.endpoint + \
                    self.STANBOL_ENTITYHUB_PATH + "/" + \
